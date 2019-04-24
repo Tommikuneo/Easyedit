@@ -1,0 +1,59 @@
+<div [ngSwitch]="step">
+<div *ngSwitchCase="0">
+
+    <h1 mat-dialog-title>Sie möchten dieses Bild Veröffentlichen?</h1>
+    <div mat-dialog-content #publishDialogContent>
+    <div class="image">
+    <img id="image" [src]="imgSrc" width="100%" alt="">
+    </div>
+    </div>
+
+
+</div>
+<div *ngSwitchCase="1">
+
+    <h1 mat-dialog-title>Wo soll es Veröffentlicht werden?</h1>
+
+      <div class="row">
+        <div class="col">
+            <mat-checkbox class="" [(ngModel)]="platforms.twitter.selected" [disabled]="!platforms.twitter.available">Twitter</mat-checkbox>
+        </div>
+      </div>
+
+        <div class="row">
+          <div class="col">
+              <mat-checkbox class="" [(ngModel)]="platforms.facebook.selected" [disabled]="!platforms.facebook.available">Facebook</mat-checkbox>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+              <mat-checkbox class="" [(ngModel)]="platforms.instagram.selected" [disabled]="!platforms.instagram.available">Instagram</mat-checkbox>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+              <mat-form-field style="width: 100%;">
+                <textarea matInput [(ngModel)]="imageText" placeholder="Bildunterschrift"></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+
+</div>
+<div *ngSwitchDefault>
+
+</div>
+</div>
+  <div class="row">
+    <div class="col-sm">
+
+    <button *ngIf="step === 0" mat-stroked-button (click)="close()">Abbrechen</button>
+    <button *ngIf="step === 1" mat-stroked-button (click)="previousStep()">Zurück</button>
+    </div>
+  <div class="col-sm">
+
+    <button *ngIf="step === 0" mat-stroked-button (click)="nextStep()">Weiter</button>
+    <button *ngIf="step === 1" mat-stroked-button (click)="publish()">Veröffentlichen</button>
+  </div>
+  </div>

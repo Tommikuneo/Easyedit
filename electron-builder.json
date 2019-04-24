@@ -1,0 +1,57 @@
+{
+  "productName": "easyedit",
+  "directories": {
+    "output": "release/"
+  },
+  "fileAssociations": [{
+    "ext": "ee",
+    "name": "zuk. Template",
+    "role": "Editor",
+    "icon": "src/ee.icns"
+  }],
+    "files": [
+        "**/*",
+        "!**/*.ts",
+        "!*.code-workspace",
+        "!LICENSE.md",
+        "!package.json",
+        "!package-lock.json",
+        "!src/",
+        "!e2e/",
+        "!hooks/",
+        "!angular.json",
+        "!_config.yml",
+        "!karma.conf.js",
+        "!tsconfig.json",
+        "!tslint.json"
+    ],
+    "appId": "com.tommiku.abschlussprojekt",
+    "publish": [
+      {
+        "provider": "generic",
+        "url": "https://gitlab.com"
+      }
+],
+
+  "win": {
+    "icon": "dist",
+    "target": [
+      "nsis",
+      "portable"
+    ],
+    "verifyUpdateCodeSignature": false
+  },
+  "mac": {
+    "icon": "dist",
+    "target": [
+      "dmg",
+"zip"
+    ]
+  },
+  "linux": {
+    "icon": "dist",
+    "target": [
+      "AppImage"
+    ]
+  }
+}

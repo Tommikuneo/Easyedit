@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h2 class="text-center">{{canvas.projectName ? canvas.projectName.name : 'Bitte laden Sie ein Template' }}</h2>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col">  
+      <div class="canvas" app-dropfile (contextmenu)="faService.onRightClickCanvas($event)">
+      <canvas class="justify-content-center" id="canvas"></canvas>
+  </div>
+</div>
+  </div>
+</div>
