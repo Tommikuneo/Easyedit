@@ -21,7 +21,7 @@ import { MatDialog } from '@angular/material';
 
 
 @Injectable()
-export class FabricEditorService extends FabricService {
+export class FabricDesignerService extends FabricService {
 
   constructor(
     public electronService: ElectronService,
@@ -63,10 +63,24 @@ export class FabricEditorService extends FabricService {
     merge(textChangeEvent, movingEvent, modifiedEvent, updateEvent).pipe(
       debounceTime(100),
        distinctUntilChanged(),
-    ).subscribe( e => this.canvas.queueManager.state = JSON.stringify(this.canvas));
+    ).subscribe( e => this.canvas.queueManager.state = this.canvas.toDatalessJSON(this.canvasExportParameter));
 
     objectScrolledEvent.subscribe(e =>  this.onScrolledCanvas(e));
 
+    // rightClickMenu.subscribe( e => console.log(e));
+    // objectClickedEvent.subscribe( e => console.log(e));
+    /*
+    this.canvas.on({
+      'object:moving': (e) => { },
+      'object:modified': (e) => { },
+      'selection:updated': (e) => this.updateView(e),
+      'object:selected': (e) => this.updateView(e),
+      'selection:cleared': (e) => {
+        this.active = null;
+        this.activeObservable.next(null);
+      }
+    });
+    */
   }
 
 
@@ -76,64 +90,6 @@ export class FabricEditorService extends FabricService {
   //#region UserKeyBindings
 
 
-  /**
-   * Öffnet Dropdown bei spezifischen Objekten
-   * @param e Das Maus Event
-   */
-  onRightClickCanvas(e: MouseEvent) {
-    const target: any = this.canvas.findTarget(e, true);
-    // Initialisiert neues menü
-    const menuItems: Electron.MenuItem[] = [];
-    if (target && this.active && target === this.active) {
-      const menu = new this.electronService.remote.Menu();
-
-      switch (target.type) {
-        case 'i-text':
-
-          break;
-        case 'image':
-
-          if ((<EImage>this.active).isPlaceholder) {
-            menuItems.push(new this.electronService.remote.MenuItem({
-              label: 'Ersetzen',
-              click: () => this.replaceImage(<EImage>this.active),
-            }));
-
-          }
-
-          break;
-      }
-
-      menuItems.forEach(it => menu.append(it));
-      // verhindert öffnen einer leeren Menüleiste
-      if (menuItems.length !== 0) {
-        menu.popup();
-      }
-
-    }
-
-  }
-
-  onScrolledCanvas(ev: fabric.IEvent) {
-    const mouseEv: WheelEvent = ev.e as WheelEvent;
-    mouseEv.preventDefault();
-    if (ev.target && this.active && ev.target === this.active) {
-
-      switch (ev.target.type) {
-        case 'i-text':
-        const el: EText = ev.target as EText;
-        const newSize = (mouseEv.deltaY < 0) ? el.fontSize + 1 : el.fontSize - 1;
-        this.setFontSize(newSize);
-          break;
-        case 'image':
-        const newScale = (mouseEv.deltaY < 0) ? ev.target.scaleX * 1.10 : ev.target.scaleX * 0.90;
-        this.setScale(newScale);
-
-          break;
-      }
-      console.log(ev.target);
-    }
-  }
 
 
   //#endregion UserKeyBindings
@@ -208,7 +164,6 @@ export class FabricEditorService extends FabricService {
 
       });
   }
-
 
 
   //#endregion IO Operations

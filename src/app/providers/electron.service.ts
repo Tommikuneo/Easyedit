@@ -71,6 +71,9 @@ export class ElectronService {
       this.router.navigate([result.action, { filePath: filePath }]);
     });
   }
-
+  
+  isElectron = () => {
+    return window && window.process && window.process.type;
+  }
 
 }

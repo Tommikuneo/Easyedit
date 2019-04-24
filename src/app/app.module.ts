@@ -13,6 +13,7 @@ import { ToastrModule } from 'ngx-toastr';
 import 'reflect-metadata';
 import '../polyfills';
 import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
 import { EditorComponent } from './components/home/editor.component';
 import { TemplateDesignerComponent } from './components/template-designer/template-designer.component';
 import { ApiKeyInputDialogComponent } from './dialogs/api-key-input-dialog.component';
@@ -24,21 +25,23 @@ import { ElectronService } from './providers/electron.service';
 import { FabricDesignerService } from './providers/fabric.designer.service';
 import { FabricEditorService } from './providers/fabric.editor.service';
 import { FontService } from './providers/font.service';
-import { ImageService } from './providers/image.service';
 import { ObjectControlService } from './providers/object-control.service';
 import { PublishService } from './providers/publish.service';
 import { StorageService } from './providers/storage.service';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+  return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
 }
 
 @NgModule({
   declarations: [
+    AppComponent,
     EditorComponent,
     WebviewDirective,
     DropfileDirective,
+    // TemplateDesignerComponent,
+    TemplateDesignerComponent,
     ViewChooserDialogComponent,
     PublishAssistentComponent,
     ApiKeyInputDialogComponent
@@ -71,11 +74,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     StorageService,
     FabricDesignerService,
     FabricEditorService,
-    ImageService,
     FontService,
     ObjectControlService,
     PublishService,
   ],
+  bootstrap: [AppComponent],
   entryComponents: [ViewChooserDialogComponent, PublishAssistentComponent, ApiKeyInputDialogComponent]
 })
 export class AppModule { }

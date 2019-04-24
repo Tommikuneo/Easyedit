@@ -5,7 +5,7 @@ import { IPublishPlatform } from '../../interfaces/IPublishPlatform';
 export class Facebook implements IPublishPlatform {
   private appId = '6546546464654567';
   private appSecret: 'ad757e4752f403blkke3c15f8i35244a';
-  private fb = new FB.Facebook({
+  fb = new FB.Facebook({
     version: 'v3.2',
     appId: this.appId,
     appSecret: this.appSecret,

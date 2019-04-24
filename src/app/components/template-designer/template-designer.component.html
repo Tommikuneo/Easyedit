@@ -1,0 +1,510 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h2 class="text-center">{{projectName.name ? projectName.name : 'Geben Sie den Projektnamen ein' }}</h2>
+    </div>
+  </div>
+</div>
+<!--<div class="container">
+    <div class="row">
+        <div class="col-xl-12 main-title">
+            <h4>Github: <a href="https://github.com/kevoj/angular-editor-fabric-js">angular-editor-fabric-js</a></h4>
+        </div>
+        <div class="col-xl-12">
+            <div class="row">
+                <div class="col-xl-12 text-right">
+                    <button data-toggle="tooltip" data-placement="bottom" title="Export to image" type="button" class="btn btn-primary" (click)="faService.saveCanvasToImage();">
+                        <i class="fa fa-download" aria-hidden="true"></i> Export to image</button>
+                    <button data-toggle="tooltip" data-placement="bottom" title="Export to SVG" type="button" class="btn btn-primary" (click)="faService.saveCanvasSVG();">
+                        <i class="fa fa-download" aria-hidden="true"></i> Export to SVG</button>
+                    <button data-toggle="tooltip" data-placement="bottom" title="Save in localStorage" type="button" class="btn btn-primary"
+                        (click)="faService.saveCanvasToJSON(canvas);">
+                        <i class="fa fa-save" aria-hidden="true"></i> Save local</button>
+                    <button data-toggle="tooltip" data-placement="bottom" title="Load from localStorage" type="button" class="btn btn-primary"
+                        (click)="loadCanvasFromJSON();">
+                        <i class="fa fa-save" aria-hidden="true"></i> Load local</button>
+                    <button data-toggle="tooltip" data-placement="bottom" title="Clean Canvas" type="button" class="btn btn-danger" (click)="confirmClear();">
+                        <i class="fa fa-ban" aria-hidden="true"></i> Clean</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    </div> -->
+<div class="container-fluid" id="designer">
+    <div class="row">
+        <div class="col-xl-3" style="max-width: 300px">
+            <div class="card">
+                <div class="card-header">Projektname</div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="text" class="form-control" [(ngModel)]="projectName.vendor" (keyup)=changeProjectName($event) >
+                            <div class="input-group-append">
+                                <span class="input-group-text">
+                                    Firma
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" [(ngModel)]="projectName.name" (keyup)=changeProjectName($event)>
+                            <div class="input-group-append">
+                                <span class="input-group-text">
+                                    Name
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <div class="card">
+                <div class="card-header">Bildgröße</div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="text" class="form-control" [(ngModel)]="size.width" (keyup)=changeSize($event)>
+                            <div class="input-group-append">
+                                <span class="input-group-text">
+                                    Breite
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" [(ngModel)]="size.height" (keyup)=changeSize($event)>
+                            <div class="input-group-append">
+                                <span class="input-group-text">
+                                    Höhe
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <div class="card">
+                <div class="card-header">Text hinzufügen</div>
+                <div class="card-body">
+                    <div class="input-group">
+                        <input type="text" class="form-control" [(ngModel)]="textString">
+                        <div class="input-group-append">
+                            <span class="input-group-text">
+                                <button id="add-text" data-toggle="tooltip" data-placement="bottom" title="Add text" class="btn btn-primary" (click)="addText()">
+                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <!--
+            <div class="card">
+                <div class="card-header">Add images</div>
+                <div class="card-body max-height">
+                    <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/pikachu.svg">
+                    <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/squirtle.svg">
+                    <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/bullbasaur.svg">
+                    <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/charmander.svg">
+                    <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/bellsprout.svg">
+                    <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/caterpie.svg">
+                    <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/dratini.svg">
+                    <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/eevee.svg">
+                    <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/jigglypuff.svg">
+                    <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/mankey.svg">
+                    <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/meowth.svg">
+                    <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/pidgey.svg">
+                    <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/psyduck.svg">
+                    <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/rattata.svg">
+                    <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/abra.svg">
+                    <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/snorlax.svg">
+                    <img class="images-item" (click)="getImgPolaroid($event)" src="assets/img/zubat.svg">
+                </div>
+            </div>
+            <br/>
+              -->
+            <div class="card">
+                <div class="card-header">Bild hochladen</div>
+                <div class="card-body text-center">
+                  <div class="row">
+                    <div class="col-sm-12">
+                        <img id="testImage" draggable="true" *ngIf="url" class="images-item-upload" [src]="url" (click)="faService.addImageOnCanvas(url);">
+                        <div class="custom-file">
+                        <input id="testImageInput" type="file" class="custom-file-input" (change)="readUrl($event);">
+                        <label class="custom-file-label" for="testImageInput"></label>
+                        </div>
+                        <br/>
+                        <br/>
+                        <div *ngIf="url" class="btn-group btn-group-justified" role="group" aria-label="...">
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn btn-outline-danger btn-sm" (click)="removeWhite(url);">
+                                    <i class="fa fa-times" aria-hidden="true"></i> Entfernen</button>
+                            </div>
+                        </div>
+
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-12">
+
+                        <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn btn-primary btn-sm" (click)="faService.addPlaceholder();">
+                                    <i class="fa fa-plus" aria-hidden="true"></i>Platzhalter hinzufügen</button>
+                            </div>
+                        </div>
+
+                    </div>
+                  </div>
+
+
+
+                </div>
+            </div>
+            <br/>
+        </div>
+        <div class="canvas" app-dropfile
+        (dropped)="canvasFileDrop($event)"
+        (contextmenu)="faService.onRightClickCanvas($event)">
+            <canvas id="canvas"></canvas>
+        </div>
+        <div class="col-xl-3" style="max-width: 300px">
+            <div class="card">
+                <div class="card-header">Optionen</div>
+                <div class="card-body text-center">
+                <div class="row">
+                  <div class="col-sm-12">
+                      <div class="btn-group" role="group" aria-label="...">
+                          <button data-toggle="tooltip" data-placement="bottom" title="Delete element" type="button" class="btn btn-outline-danger" [disabled]="!aElement"
+                              (click)="faService.removeSelected();">
+                              <i class="fa fa-trash" aria-hidden="true"></i>
+                          </button>
+                          <button data-toggle="tooltip" data-placement="bottom" title="Send to back" type="button" class="btn btn-outline-primary" [disabled]="!aElement"
+                              (click)="faService.sendToBack();">
+                              <i class="fa fa-level-down" aria-hidden="true"></i>
+                          </button>
+                          <button data-toggle="tooltip" data-placement="bottom" title="Send to front" type="button" class="btn btn-outline-primary" [disabled]="!aElement"
+                              (click)="faService.bringToFront();">
+                              <i class="fa fa-level-up" aria-hidden="true"></i>
+                          </button>
+                          <button data-toggle="tooltip" data-placement="bottom" title="Clone" type="button" class="btn btn-outline-primary" [disabled]="!aElement || aElement.type == 'group'"
+                              (click)="faService.clone();">
+                              <i class="fa fa-clone" aria-hidden="true"></i>
+                          </button>
+                          <button data-toggle="tooltip" data-placement="bottom" title="Unselect" type="button" class="btn btn-outline-primary" [disabled]="!aElement"
+                              (click)="faService.cleanSelect()">
+                              <i class="fa fa-remove" aria-hidden="true"></i>
+                          </button>
+                      </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-12">
+                      <ng-container *ngIf="aElement as obj">
+                          <div class="btn-group" role="group" aria-label="...">
+                            <button data-toggle="tooltip" data-placement="bottom" title="Enable Controls" type="button" class="btn btn-outline-primary" [disabled]="!aElement"
+                            [ngClass]="{'active': obj.hasControls}" (click)="faService.setControls($event)">
+                                <i class="fa fa-arrows" aria-hidden="true"></i>
+                            </button>
+                            <button data-toggle="tooltip" data-placement="bottom" title="Send to back" type="button" class="btn btn-outline-primary" [disabled]="!aElement"
+                            [ngClass]="{'active': !obj.lockMovementX}" (click)="faService.setMovementX($event)">
+                                <i class="fa fa-arrows-h" aria-hidden="true"></i>
+                            </button>
+                            <button data-toggle="tooltip" data-placement="bottom" title="Send to front" type="button" class="btn btn-outline-primary" [disabled]="!aElement"
+                            [ngClass]="{'active': !obj.lockMovementY}" (click)="faService.setMovementY($event)">
+                                <i class="fa fa-arrows-v" aria-hidden="true"></i>
+                            </button>
+                            <!--
+                            <button data-toggle="tooltip" data-placement="bottom" title="Clone" type="button" class="btn btn-outline-primary" [disabled]="!aElement || aElement.type == 'group'"
+                                (click)="clone();">
+                                <i class="fa fa-clone" aria-hidden="true"></i>
+                            </button>
+                            <button data-toggle="tooltip" data-placement="bottom" title="Unselect" type="button" class="btn btn-outline-primary" [disabled]="!aElement"
+                                (click)="cleanSelect()">
+                                <i class="fa fa-remove" aria-hidden="true"></i>
+                            </button>
+                            -->
+                        </div>
+                          </ng-container>
+                  </div>
+
+                </div>
+              </div>
+
+
+            </div>
+            <br/>
+            <div class="card" *ngIf="!aElement">
+                <div class="card-header">Canvas</div>
+                <div class="card-body">
+                    <div class="custom-item" *ngIf="!props.canvasImage">
+                        <div class="custom-item-title">Hintergrundfarbe</div>
+                        <div class="custom-item-body">
+                            <input type="text" class="form-control" [attr.cpPosition]="'bottom'" [(colorPicker)]="props.canvasFill" [style.background]="props.canvasFill"
+                                [value]="props.canvasFill">
+                        </div>
+                    </div>
+                    <div class="custom-item">
+                        <div class="custom-item-title">Hintergrundbild (url)</div>
+                        <div class="custom-item-body">
+                            <input type="text" class="form-control" placeholder="http://example.jpg" [(ngModel)]="props.canvasImage" (keyup)="setCanvasImage()">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <div class="card" *ngIf="aElement">
+                <div class="card-header">{{ (aElement) ? aElement.type : 'Custom' }} </div>
+                <div class="card-body">
+                  <div class="container">
+                    <!--<div class="custom-item" *ngIf="!aElement">No items aElement</div>-->
+
+                    <ng-container *ngIf="aElement as obj">
+
+                    <div class="custom-item" *ngIf="obj.type == 'group'">Gruppe selektiert</div>
+                    <div class="custom-item" *ngIf="obj.type != 'group'">
+                        <div class="custom-item-title">ID</div>
+                        <div class="custom-item-body">
+                            <input type="text" class="form-control" [ngModel]="faService.getId()" (ngModelChange)="faService.setId($event)">
+                        </div>
+                    </div>
+
+                    <div class="custom-item">
+                        <div class="custom-item-title">X Achse</div>
+                        <div class="custom-item-body">
+                          <div class="row">
+                            <div class="col-7">
+                              <input type="range" class="custom-range" [ngModel]="faService.getLeft()" (ngModelChange)="faService.setLeft($event)" step="10"
+                                min="0" max="100">
+                            </div>
+                            <div class="col-5">
+                              <input type="text" class="form-control" [ngModel]="faService.getLeft()" (ngModelChange)="faService.setLeft($event)">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="custom-item">
+                        <div class="custom-item-title">Y Achse</div>
+                        <div class="custom-item-body">
+                          <div class="row">
+                            <div class="col-7">
+                            <input type="range" class="custom-range" [ngModel]="faService.getTop()" (ngModelChange)="faService.setTop($event)" step="10"
+                                min="0" max="100">
+                            </div>
+                            <div class="col-5">
+                              <input type="text" class="form-control" [ngModel]="faService.getTop()" (ngModelChange)="faService.setTop($event)">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                    <div class="custom-item" *ngIf="obj.type != 'group'">
+                        <div class="custom-item-title">Sichtbarkeit</div>
+                        <div class="custom-item-body">
+                          <div class="row">
+                            <div class="col-7">
+                                <input type="range" class="custom-range"  [ngModel]="faService.getOpacity()" (ngModelChange)="faService.setOpacity($event)">
+                            </div>
+                            <div class="col-5">
+                              <input type="text" class="form-control" [ngModel]="faService.getOpacity()"  (ngModelChange)="faService.setOpacity($event)">
+                            </div>
+                          </div>
+                    </div>
+                    </div>
+
+                    <ng-container *ngIf="obj.type === 'i-text'">
+                    <div class="custom-item">
+                        <div class="custom-item-title">Füllfarbe</div>
+                        <div class="custom-item-body">
+                            <input type="text" class="form-control" [attr.cpPosition]="'bottom'" [colorPicker]="obj.fill" [style.background]="obj.fill"
+                                [ngModel]="obj.fill" (colorPickerChange)="faService.setFill($event)">
+                        </div>
+                    </div>
+                    <div class="custom-item">
+                        <div class="custom-item-title">Schriftart</div>
+                        <div class="custom-item-body">
+                        <div class="input-group">
+
+                            <select [ngModel]="obj.fontFamily" class="custom-select" (ngModelChange)="faService.setFontFamily($event)">
+                                <option *ngFor="let font of fonts" [value]="font">{{font}}</option>
+                              <!-- <option value="arial">Arial</option>
+                                <option value="helvetica" aElement>Helvetica</option>
+                                <option value="verdana">Verdana</option>
+                                <option value="courier">Courier</option>
+                                <option value="Roboto">Roboto</option>
+                                <option value="Open Sans">Open Sans</option>
+                                <option value="Zilla Slab">Zilla Slab</option>
+                                <option value="Lato">Lato</option>
+                                <option value="Bellefair">Bellefair</option>
+                                <option value="Fresca">Fresca</option>
+                                <option value="Raleway">Raleway</option>
+                                <option value="Open Sans Condensed">Open Sans Condensed</option>
+                                <option value="Indie Flower">Indie Flower</option>
+                                <option value="Josefin Sans">Josefin Sans</option>
+                                <option value="Inconsolata">Inconsolata</option>
+                                <option value="Pacifico">Pacifico</option>
+                                <option value="Gloria Hallelujah">Gloria Hallelujah</option>
+                                -->
+                            </select>
+
+
+                        <div class="input-group-append">
+                          <span class="input-group-text">
+                              <button id="add-text" data-toggle="tooltip" data-placement="bottom" title="Add text" class="btn btn-primary" (click)="faService.addNewFont()">
+                                  <i class="fa fa-plus" aria-hidden="true"></i>
+                              </button>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    </div>
+                    <div class="custom-item">
+                        <div class="custom-item-title">Textausrichtung</div>
+                        <div class="custom-item-body text-center">
+                            <div class="btn-group" role="group" aria-label="...">
+                                <button type="button" class="btn btn-primary" [ngClass]="{'active': obj.textAlign == 'left' }" (click)="faService.setTextAlign('left')">
+                                    <i class="fa fa-align-left"></i>
+                                </button>
+                                <button type="button" class="btn btn-primary" [ngClass]="{'active': obj.textAlign == 'center' }" (click)="faService.setTextAlign('center')">
+                                    <i class="fa fa-align-center"></i>
+                                </button>
+                                <button type="button" class="btn btn-primary" [ngClass]="{'active': obj.textAlign == 'right' }" (click)="faService.setTextAlign('right')">
+                                    <i class="fa fa-align-right"></i>
+                                </button>
+                                <button type="button" class="btn btn-primary" [ngClass]="{'active': obj.textAlign == 'justify' }" (click)="faService.setTextAlign('justify')">
+                                    <i class="fa fa-align-justify"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="custom-item">
+                      <div class="custom-item-title">Textfluss</div>
+                      <div class="custom-item-body text-center">
+                          <div class="btn-group" role="group" aria-label="...">
+                              <button type="button" class="btn btn-primary" [ngClass]="{'active': obj.originX == 'left' }" (click)="faService.setTextGrow('left')">
+                                  <i class="fa fa-align-left"></i>
+                              </button>
+                              <button type="button" class="btn btn-primary" [ngClass]="{'active': obj.originX == 'center' }" (click)="faService.setTextGrow('center')">
+                                  <i class="fa fa-align-center"></i>
+                              </button>
+                          </div>
+                      </div>
+                  </div>
+                    <div class="custom-item">
+                      <div class="custom-item-title">Stil</div>
+                      <div class="custom-item-body text-center">
+                        <div class="btn-group" role="group" aria-label="...">
+                          <button type="button" class="btn btn-primary btn-sm" [ngClass]="{'active': obj.fontWeight }" (click)="faService.setBold()">
+                            <i class="fa fa-bold"></i>
+                          </button>
+                          <button type="button" class="btn btn-primary btn-sm" [ngClass]="{'active': faService.getFontStyle }" (click)="faService.setFontStyle()">
+                            <i class="fa fa-italic"></i>
+                          </button>
+                          <button type="button" class="btn btn-primary btn-sm" [ngClass]="{'active': obj.underline }"
+                            (click)="faService.setUnderline()">
+                            <i class="fa fa-underline"></i>
+                          </button>
+                          <button type="button" class="btn btn-primary btn-sm" [ngClass]="{'active': obj.overline }"
+                            (click)="faService.setOverline()">
+                            <i class="fa fa-underline fa-flip-vertical"></i>
+                          </button>
+                          <button type="button" class="btn btn-primary btn-sm" [ngClass]="{'active': obj.linethrough }"
+                            (click)="faService.setLinethrough()">
+                            <i class="fa fa-strikethrough"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="custom-item">
+                      <div class="custom-item-title">Schriftgröße</div>
+                      <div class="custom-item-body">
+                        <div class="row">
+                          <div class="col-7">
+                            <input type="range" class="custom-range" [ngModel]="obj.fontSize" (ngModelChange)="faService.setFontSize($event)" step="1" min="1"
+                              max="120">
+                          </div>
+                          <div class="col-5">
+                            <input type="text" class="form-control" [ngModel]="obj.fontSize" (ngModelChange)="faService.setFontSize($event)" >
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="custom-item">
+                      <div class="custom-item-title">Linienhöhe</div>
+                      <div class="custom-item-body">
+                        <div class="row">
+                          <div class="col-7">
+                            <input type="range" class="custom-range" [ngModel]="obj.lineHeight" (ngModelChange)="faService.setLineHeight($event)" step="0.1"
+                              min="0" max="10">
+                          </div>
+                          <div class="col-5">
+                            <input type="text" class="form-control" [ngModel]="obj.lineHeight" (ngModelChange)="faService.setLineHeight($event)">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="custom-item">
+                      <div class="custom-item-title">Zeichenabstand</div>
+                      <div class="custom-item-body">
+                        <div class="row">
+                          <div class="col-7">
+                            <input type="range" class="custom-range" [ngModel]="obj.charSpacing" (ngModelChange)="faService.setCharSpacing($event)" step="10"
+                              min="-200" max="800">
+                          </div>
+                          <div class="col-5">
+                            <input type="text" class="form-control" [ngModel]="obj.charSpacing" (ngModelChange)="faService.setCharSpacing($event)">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    </ng-container>
+
+                    <div class="custom-item" *ngIf="obj.type === 'image'">
+
+                      <div class="custom-item-title">Bildvergrößerung</div>
+                      <div class="custom-item-body">
+                        <div class="row">
+                          <div class="col-7">
+                            <input type="range" class="custom-range" [ngModel]="obj.scaleX" (ngModelChange)="faService.setScale($event)" step="0.1"
+                              min="0" max="1.5">
+                          </div>
+                          <div class="col-5">
+                            <input type="text" class="form-control" [ngModel]="obj.scaleX" (ngModelChange)="faService.setScale($event)">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    </ng-container>
+
+                    </div>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+   <!-- <div class="container">
+
+    <div class="row">
+        <div class="col-xl-12">
+            <br/>
+            <div class="card">
+                <div class="card-header">
+                    <button type="button" class="btn btn-primary btn-sm" (click)="rasterizeJSON()">
+                        <i class="fa fa-refresh" aria-hidden="true"></i> Render to json</button>
+                </div>
+                <div class="card-body">
+                    <pre>{{json.length}}</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+</div>
+-->
